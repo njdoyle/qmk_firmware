@@ -13,6 +13,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 			case D_COLEM: set_single_persistent_default_layer(_COLEMAK    ); return false;
 			case D_C_DH : set_single_persistent_default_layer(_COLEMAK_DH ); return false;
 			case D_C_DHM: set_single_persistent_default_layer(_COLEMAK_DHM); return false;
+			case D_WISH : set_single_persistent_default_layer(_WISH       ); return false;
 			case D_WORKM: set_single_persistent_default_layer(_WORKMAN    ); return false;
 		}
 

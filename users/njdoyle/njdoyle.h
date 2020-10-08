@@ -3,16 +3,17 @@
 #include QMK_KEYBOARD_H
 
 // LAYERS
-#define _QWERTY      0
-#define _DVORAK      1
-#define _COLEMAK     2
-#define _COLEMAK_DH  3
-#define _COLEMAK_DHM 4
-#define _WORKMAN     5
-#define _LOWER       6
-#define _RAISE       7
-#define _NAVIGATION  8
-#define _FUNCTION    9
+#define _QWERTY       0
+#define _DVORAK       1
+#define _COLEMAK      2
+#define _COLEMAK_DH   3
+#define _COLEMAK_DHM  4
+#define _WISH         5
+#define _WORKMAN      6
+#define _LOWER        7
+#define _RAISE        8
+#define _NAVIGATION   9
+#define _FUNCTION    10
 
 // KEY ALIASES
 #define NJM_1   LSA(KC_P1)
@@ -47,6 +48,7 @@ enum njdoyle_keycodes {
 	D_COLEM,              // Colemak
 	D_C_DH ,              // Colemak Mod-DH
 	D_C_DHM,              // Colemak Mod-DHm
+	D_WISH ,              // Wish
 	D_WORKM,              // Workman
 
 	// EMOTES
@@ -87,6 +89,11 @@ enum njdoyle_keycodes {
 		Q, W, F, P, B, J, L, U   , Y  , SCLN, \
 		A, R, S, T, G, M, N, E   , I  , O   , \
 		Z, X, C, D, V, K, H, COMM, DOT, SLSH  \
+	), \
+	[_WISH] = NJDOYLE_LAYOUT_BASE_KC( \
+		J   , P, U   , O   , K  , B, D, R, F, Q, \
+		W   , I, E   , A   , DOT, G, T, N, S, H, \
+		SLSH, Y, SCLN, COMM, Z  , V, M, L, C, X  \
 	), \
 	[_WORKMAN] = NJDOYLE_LAYOUT_BASE_KC( \
 		Q, D, R, W, B, J, F, U   , P  , SCLN, \
