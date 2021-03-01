@@ -7,4 +7,4 @@ UNICODE_ENABLE  = no
 
 # COMPILE OPTIONS
 LTO_ENABLE = yes
-SRC += njdoyle.c
+SRC += njd_core.c njd_keymap.c njd_oled.c

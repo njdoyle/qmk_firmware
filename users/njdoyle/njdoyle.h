@@ -61,6 +61,10 @@ enum njdoyle_keycodes {
 	NJDOYLE_SAFE_RANGE
 };
 
+void    njd_set_default_layout(uint8_t);
+uint8_t njd_get_default_layout(void   );
+void    njd_toggle_linux_mode (void   );
+bool    njd_is_linux_mode     (void   );
+
 bool          process_record_njdoyle (uint16_t, keyrecord_t*) __attribute__((weak));
 layer_state_t layer_state_set_njdoyle(layer_state_t         ) __attribute__((weak));
-
