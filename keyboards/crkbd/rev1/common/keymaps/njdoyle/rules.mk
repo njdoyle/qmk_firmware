@@ -1,3 +1,2 @@
 OLED_DRIVER_ENABLE = yes
 RGBLIGHT_ENABLE    = no
-VIA_ENABLE         = no
