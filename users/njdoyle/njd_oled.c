@@ -4,14 +4,14 @@
 
 static void njd_oled_render_layout_state(void) {
 	oled_write_P(PSTR("Layout: "), false);
-	switch (njd_get_default_layout()) {
-		case _QWERTY     : oled_write_ln_P(PSTR("QWERTY"     ), false); break;
-		case _DVORAK     : oled_write_ln_P(PSTR("Dvorak"     ), false); break;
-		case _COLEMAK    : oled_write_ln_P(PSTR("Colemak"    ), false); break;
-		case _COLEMAK_DH : oled_write_ln_P(PSTR("Colemak DH" ), false); break;
-		case _COLEMAK_DHK: oled_write_ln_P(PSTR("Colemak DHk"), false); break;
-		case _WORKMAN    : oled_write_ln_P(PSTR("Workman"    ), false); break;
-		default          : oled_write_ln_P(PSTR("UNKNOWN"    ), false); break;
+	switch (get_highest_layer(default_layer_state)) {
+		case NJD_L_QWERTY     : oled_write_ln_P(PSTR("QWERTY"     ), false); break;
+		case NJD_L_DVORAK     : oled_write_ln_P(PSTR("Dvorak"     ), false); break;
+		case NJD_L_COLEMAK    : oled_write_ln_P(PSTR("Colemak"    ), false); break;
+		case NJD_L_COLEMAK_DH : oled_write_ln_P(PSTR("Colemak DH" ), false); break;
+		case NJD_L_COLEMAK_DHK: oled_write_ln_P(PSTR("Colemak DHk"), false); break;
+		case NJD_L_WORKMAN    : oled_write_ln_P(PSTR("Workman"    ), false); break;
+		default               : oled_write_ln_P(PSTR("UNKNOWN"    ), false); break;
 	}
 }
 
@@ -24,14 +24,13 @@ static void njd_oled_render_os_mode(void) {
 static void njd_oled_render_layer_state(void) {
 	oled_write_P(PSTR(" Layer: "), false);
 	switch (get_highest_layer(layer_state)) {
-		case 0xFF         : oled_write_ln_P(PSTR("Base"      ), false); break;
-		case _LOWER       : oled_write_ln_P(PSTR("Lower"     ), false); break;
-		case _RAISE       : oled_write_ln_P(PSTR("Raise"     ), false); break;
-		case _NAVIGATION_M: oled_write_ln_P(PSTR("Navigation"), false); break;
-		case _NAVIGATION_L: oled_write_ln_P(PSTR("Navigation"), false); break;
-		case _MOUSE       : oled_write_ln_P(PSTR("Mouse"     ), false); break;
-		case _FUNCTION    : oled_write_ln_P(PSTR("Function"  ), false); break;
-		default           : oled_write_ln_P(PSTR("UNKNOWN"   ), false); break;
+		case 0               : oled_write_ln_P(PSTR("Base"      ), false); break;
+		case NJD_L_LOWER     : oled_write_ln_P(PSTR("Lower"     ), false); break;
+		case NJD_L_RAISE     : oled_write_ln_P(PSTR("Raise"     ), false); break;
+		case NJD_L_NAVIGATION: oled_write_ln_P(PSTR("Navigation"), false); break;
+		case NJD_L_MOUSE     : oled_write_ln_P(PSTR("Mouse"     ), false); break;
+		case NJD_L_FUNCTION  : oled_write_ln_P(PSTR("Function"  ), false); break;
+		default              : oled_write_ln_P(PSTR("UNKNOWN"   ), false); break;
 	}
 }
 

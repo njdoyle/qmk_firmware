@@ -2,69 +2,62 @@
 
 #include QMK_KEYBOARD_H
 
-// LAYERS
-#define _QWERTY        0
-#define _DVORAK        1
-#define _COLEMAK       2
-#define _COLEMAK_DH    3
-#define _COLEMAK_DHK   4
-#define _WORKMAN       5
-#define _LINUX         6
-#define _LOWER         7
-#define _RAISE         8
-#define _NAVIGATION_M  9
-#define _NAVIGATION_L 10
-#define _MOUSE        11
-#define _FUNCTION     12
+/* LAYERS */
+#define NJD_L_QWERTY        0
+#define NJD_L_DVORAK        1
+#define NJD_L_COLEMAK       2
+#define NJD_L_COLEMAK_DH    3
+#define NJD_L_COLEMAK_DHK   4
+#define NJD_L_WORKMAN       5
+#define NJD_L_LOWER         6
+#define NJD_L_RAISE         7
+#define NJD_L_NAVIGATION    8
+#define NJD_L_MOUSE         9
+#define NJD_L_FUNCTION     10
 
-// KEY ALIASES
-#define L_LOWER MO(_LOWER)
-#define L_RAISE MO(_RAISE)
-#define L_FUNC  MO(_FUNCTION)
-#define L_MOUSE TG(_MOUSE)
-#define KC_____ KC_TRNS
-#define KC_XXXX KC_NO
+/* KEY ALIASES */
+#define NJD_K_LOWER      MO(NJD_L_LOWER     )
+#define NJD_K_RAISE      MO(NJD_L_RAISE     )
+#define NJD_K_NAVIGATION MO(NJD_L_NAVIGATION)
+#define NJD_K_FUNCTION   MO(NJD_L_FUNCTION  )
+#define NJD_K_MOUSE      TG(NJD_L_MOUSE     )
+#define KC_____          KC_TRNS
+#define KC_XXXX          KC_NO
 
-// MAC ALIASES
-#define DM_LEFT LCTL(KC_LEFT)
-#define DM_RGHT LCTL(KC_RIGHT)
-#define DM_MENU LCTL(KC_F2)
-#define TM_LEFT SGUI(KC_LBRC)
-#define TM_RGHT SGUI(KC_RBRC)
-#define TM_NEW  LGUI(KC_T)
-#define BM_BACK RGUI(KC_LBRC)
-#define BM_FRWD RGUI(KC_RBRC)
-#define BM_TOOL LCAG(KC_SLSH)
+enum njd_keycodes {
+	NJD_K_QWERTY = SAFE_RANGE,
+	NJD_K_DVORAK,
+	NJD_K_COLEMAK,
+	NJD_K_COLEMAK_DH ,
+	NJD_K_COLEMAK_DHK,
+	NJD_K_WORKMAN,
 
-// LINUX ALIASES
-#define DL_LEFT LGUI(KC_PGUP)
-#define DL_RGHT LGUI(KC_PGDN)
-#define TL_LEFT LCTL(KC_PGUP)
-#define TL_RGHT LCTL(KC_PGDN)
-#define TL_NEW  LCTL(KC_T)
-#define BL_BACK LALT(KC_LEFT)
-#define BL_FRWD LALT(KC_RGHT)
+	NJD_K_RMAMOD,
+	NJD_K_LMAMOD,
+	NJD_K_LMIMOD,
+	NJD_K_OSMODE,
+	NJD_K_MENU,
 
-enum njdoyle_keycodes {
-	// DEFAULT LAYERS
-	D_QWRTY = SAFE_RANGE, // QWERTY
-	D_DVRAK,              // Dvorak
-	D_COLEM,              // Colemak
-	D_C_DH ,              // Colemak Mod-DH
-	D_C_DHK,              // Colemak Mod-DHk
-	D_WORKM,              // Workman
+	NJD_K_NV_MOD1,
+	NJD_K_NV_MOD2,
+	NJD_K_NV_MOD3,
+	NJD_K_DM_PREV,
+	NJD_K_DM_NEXT,
+	NJD_K_TB_PREV,
+	NJD_K_TB_NEXT,
+	NJD_K_TB_NEW,
+	NJD_K_BR_BACK,
+	NJD_K_BR_FORWARD,
+	NJD_K_SS_ALL,
+	NJD_K_SS_WINDOW,
+	NJD_K_SS_AREA,
 
-	// MODES
-	L_LINUX,
-
-	// UTILITY
-	NJDOYLE_SAFE_RANGE
+	NJD_SAFE_RANGE
 };
 
-void    njd_set_default_layout(uint8_t);
-uint8_t njd_get_default_layout(void   );
-void    njd_toggle_linux_mode (void   );
-bool    njd_is_linux_mode     (void   );
+void njd_toggle_linux_mode(void);
+bool njd_is_linux_mode    (void);
 
-bool          process_record_njdoyle (uint16_t, keyrecord_t*) __attribute__((weak));
-layer_state_t layer_state_set_njdoyle(layer_state_t         ) __attribute__((weak));
+bool          process_record_njd    (uint16_t, keyrecord_t*);
+layer_state_t layer_state_set_njd   (layer_state_t         );
+void          keyboard_post_init_njd(void                  );
