@@ -24,7 +24,7 @@
 #define KC_____          KC_TRNS
 #define KC_XXXX          KC_NO
 
-enum njd_keycodes {
+enum njd_keycode {
 	NJD_K_QWERTY = SAFE_RANGE,
 	NJD_K_DVORAK,
 	NJD_K_COLEMAK,
@@ -32,12 +32,12 @@ enum njd_keycodes {
 	NJD_K_COLEMAK_DHK,
 	NJD_K_WORKMAN,
 
+	NJD_K_OS_MODE,
+
 	NJD_K_RMAMOD,
 	NJD_K_LMAMOD,
 	NJD_K_LMIMOD,
-	NJD_K_OSMODE,
 	NJD_K_MENU,
-
 	NJD_K_NV_MOD1,
 	NJD_K_NV_MOD2,
 	NJD_K_NV_MOD3,
@@ -49,14 +49,24 @@ enum njd_keycodes {
 	NJD_K_BR_BACK,
 	NJD_K_BR_FORWARD,
 	NJD_K_SS_ALL,
-	NJD_K_SS_WINDOW,
 	NJD_K_SS_AREA,
+	NJD_K_SS_WINDOW,
 
 	NJD_SAFE_RANGE
 };
 
-void njd_toggle_linux_mode(void);
-bool njd_is_linux_mode    (void);
+#define NJD_K_OS_START NJD_K_RMAMOD
+#define NJD_K_OS_END   NJD_K_SS_WINDOW
+
+enum njd_os_mode {
+	NJD_OS_MACOS  ,
+	NJD_OS_LINUX  ,
+	NJD_OS_WINDOWS,
+	NJD_OS_END
+};
+
+enum njd_os_mode njd_cycle_os_mode(void);
+enum njd_os_mode njd_get_os_mode  (void);
 
 bool          process_record_njd    (uint16_t, keyrecord_t*);
 layer_state_t layer_state_set_njd   (layer_state_t         );

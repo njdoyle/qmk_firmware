@@ -17,8 +17,12 @@ static void njd_oled_render_layout_state(void) {
 
 static void njd_oled_render_os_mode(void) {
 	oled_write_P(PSTR("  Mode: "), false);
-	if   (njd_is_linux_mode()) oled_write_ln_P(PSTR("Linux"), false);
-	else                       oled_write_ln_P(PSTR("macOS"), false);
+	switch (njd_get_os_mode()) {
+		case NJD_OS_MACOS  : oled_write_ln_P(PSTR("macOS"  ), false); break;
+		case NJD_OS_LINUX  : oled_write_ln_P(PSTR("Linux"  ), false); break;
+		case NJD_OS_WINDOWS: oled_write_ln_P(PSTR("Windows"), false); break;
+		default            : oled_write_ln_P(PSTR("UNKNOWN"), false); break;
+	}
 }
 
 static void njd_oled_render_layer_state(void) {
