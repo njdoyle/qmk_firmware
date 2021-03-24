@@ -14,6 +14,7 @@
 #define NJD_L_NAVIGATION    8
 #define NJD_L_MOUSE         9
 #define NJD_L_FUNCTION     10
+#define NJD_L_OPTIONS      11
 
 /* KEY ALIASES */
 #define NJD_K_LOWER      MO(NJD_L_LOWER     )
@@ -21,6 +22,7 @@
 #define NJD_K_NAVIGATION MO(NJD_L_NAVIGATION)
 #define NJD_K_FUNCTION   MO(NJD_L_FUNCTION  )
 #define NJD_K_MOUSE      TG(NJD_L_MOUSE     )
+#define NJD_K_OPTIONS    TG(NJD_L_OPTIONS   )
 #define KC_____          KC_TRNS
 #define KC_XXXX          KC_NO
 

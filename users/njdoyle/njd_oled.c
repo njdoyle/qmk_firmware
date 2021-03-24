@@ -34,6 +34,7 @@ static void njd_oled_render_layer_state(void) {
 		case NJD_L_NAVIGATION: oled_write_ln_P(PSTR("Navigation"), false); break;
 		case NJD_L_MOUSE     : oled_write_ln_P(PSTR("Mouse"     ), false); break;
 		case NJD_L_FUNCTION  : oled_write_ln_P(PSTR("Function"  ), false); break;
+		case NJD_L_OPTIONS   : oled_write_ln_P(PSTR("Options"   ), false); break;
 		default              : oled_write_ln_P(PSTR("UNKNOWN"   ), false); break;
 	}
 }
