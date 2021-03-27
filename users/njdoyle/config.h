@@ -4,10 +4,8 @@
 #define FORCE_NKRO
 #define ONESHOT_TAP_TOGGLE 0
 #define TAPPING_TERM 200
-//#define TAPPING_FORCE_HOLD
 
 // MOUSE
-//#define MK_COMBINED
 #define MK_3_SPEED
 #define MK_MOMENTARY_ACCEL
 #define MOUSEKEY_DELAY      100
@@ -23,15 +21,16 @@
 #define MK_C_INTERVAL_2      16
 
 #ifdef OLED_DRIVER_ENABLE
-//#	ifdef NJD_OLED_NEW
+#	define NJD_OLED_NEW
+#	ifdef NJD_OLED_NEW
 #		define OLED_FONT_WIDTH  8
 #		define OLED_FONT_HEIGHT 8
 #		define OLED_FONT_START  0x00
-#		define OLED_FONT_END    0x6F
+#		define OLED_FONT_END    0x7F
 #		define OLED_FONT_H "users/njdoyle/njd_oled_font.c"
-//#	else
-//#		define OLED_FONT_H "drivers/oled/glcdfont.c"
-//#	endif
+#	else
+#		define OLED_FONT_H "drivers/oled/glcdfont.c"
+#	endif
 #endif
 
 // AUDIO
