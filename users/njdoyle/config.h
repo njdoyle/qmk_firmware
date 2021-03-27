@@ -26,7 +26,7 @@
 #		define OLED_FONT_WIDTH  8
 #		define OLED_FONT_HEIGHT 8
 #		define OLED_FONT_START  0x00
-#		define OLED_FONT_END    0x7F
+#		define OLED_FONT_END    0x8F
 #		define OLED_FONT_H "users/njdoyle/njd_oled_font.c"
 #	else
 #		define OLED_FONT_H "drivers/oled/glcdfont.c"
