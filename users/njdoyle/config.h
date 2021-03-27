@@ -22,6 +22,18 @@
 #define MK_C_OFFSET_2        32
 #define MK_C_INTERVAL_2      16
 
+#ifdef OLED_DRIVER_ENABLE
+//#	ifdef NJD_OLED_NEW
+#		define OLED_FONT_WIDTH  8
+#		define OLED_FONT_HEIGHT 8
+#		define OLED_FONT_START  0x00
+#		define OLED_FONT_END    0x6F
+#		define OLED_FONT_H "users/njdoyle/njd_oled_font.c"
+//#	else
+//#		define OLED_FONT_H "drivers/oled/glcdfont.c"
+//#	endif
+#endif
+
 // AUDIO
 #ifdef AUDIO_ENABLE
 #	define DEFAULT_LAYER_SONGS { \

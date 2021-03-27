@@ -4,7 +4,7 @@
 #define EE_HANDS
 
 /* OLED */
-#define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
+#define NJD_OLED_NEW
 
 /* RGB */
 #ifdef RGB_MATRIX_ENABLE
