@@ -1,33 +1,84 @@
 #include "njdoyle.h"
 
+#define NJD_SIGNATURE1 0x6E /* n */
+#define NJD_SIGNATURE2 0x6A /* j */
+#define NJD_SIGNATURE3 0x64 /* d */
+
 typedef union {
 	uint32_t raw;
 	struct {
-		unsigned int os_mode : 2;
+		unsigned int os_mode    : 2;
+		unsigned int oled_mode  : 2;
+		unsigned int reserved   : 4;
+		unsigned int signature1 : 8;
+		unsigned int signature2 : 8;
+		unsigned int signature3 : 8;
 	};
 } njd_config_t;
-njd_config_t njd_config;
+static njd_config_t njd_config;
 
-enum njd_os_mode njd_cycle_os_mode(void) {
+extern keymap_config_t keymap_config;
+
+void njd_set_os_mode(enum njd_os_mode mode) {
 	clear_keyboard();
-	njd_config.os_mode += 1;
-	if (NJD_OS_END == njd_config.os_mode) njd_config.os_mode = 0;
+	njd_config.os_mode = mode;
 	eeconfig_update_user(njd_config.raw);
-	return njd_config.os_mode;
 }
 
 enum njd_os_mode njd_get_os_mode(void) {
 	return njd_config.os_mode;
 }
 
+uint8_t njd_cycle_oled_mode(void) {
+#ifdef OLED_DRIVER_ENABLE
+	njd_config.oled_mode = (njd_config.oled_mode + 1) & 0x03;
+	eeconfig_update_user(njd_config.raw);
+#endif
+	return njd_config.oled_mode;
+}
+
+uint8_t njd_get_oled_mode(void) {
+	return njd_config.oled_mode;
+}
+
+void njd_factory_reset(void) {
+	clear_keyboard();
+	set_single_persistent_default_layer(NJD_L_QWERTY);
+
+#ifdef RGB_MATRIX_ENABLE
+	rgb_matrix_sethsv_noeeprom   (HSV_CYAN                 );
+	rgb_matrix_set_speed_noeeprom(112                      );
+	rgb_matrix_mode_noeeprom     (RGB_MATRIX_SOLID_REACTIVE);
+	rgb_matrix_enable_noeeprom();
+	eeconfig_update_rgb_matrix();
+#endif
+
+	keymap_config.raw  = 0;
+	keymap_config.nkro = 1;
+	eeconfig_update_keymap(keymap_config.raw);
+
+	njd_config.os_mode    = NJD_OS_MACOS;
+	njd_config.oled_mode  = 2;
+	njd_config.reserved   = 0;
+	njd_config.signature1 = NJD_SIGNATURE1;
+	njd_config.signature2 = NJD_SIGNATURE2;
+	njd_config.signature3 = NJD_SIGNATURE3;
+	eeconfig_update_user(njd_config.raw);
+}
+
 void keyboard_post_init_user(void) {
 	njd_config.raw = eeconfig_read_user();
+	if (
+			NJD_SIGNATURE1 != njd_config.signature1 ||
+			NJD_SIGNATURE2 != njd_config.signature2 ||
+			NJD_SIGNATURE3 != njd_config.signature3 )
+		njd_factory_reset();
 	keyboard_post_init_njd();
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
 	state = layer_state_set_njd(state);
-	return update_tri_layer_state(state, NJD_L_LOWER, NJD_L_RAISE, NJD_L_NAVIGATION);
+	return update_tri_layer_state(state, NJD_L_NUMBER, NJD_L_SYMBOL, NJD_L_NAVIGATION);
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
@@ -42,7 +93,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 			case NJD_K_COLEMAK_DHK: set_single_persistent_default_layer(NJD_L_COLEMAK_DHK); return false;
 			case NJD_K_WORKMAN    : set_single_persistent_default_layer(NJD_L_WORKMAN    ); return false;
 			/* MODES */
-			case NJD_K_OS_MODE: njd_cycle_os_mode(); return false;
+			case NJD_K_OS_MACOS  : njd_set_os_mode(NJD_OS_MACOS  ); return false;
+			case NJD_K_OS_LINUX  : njd_set_os_mode(NJD_OS_LINUX  ); return false;
+			case NJD_K_OS_WINDOWS: njd_set_os_mode(NJD_OS_WINDOWS); return false;
+			case NJD_K_OLED_MODE : njd_cycle_oled_mode()          ; return false;
+			/* OTHER */
+			case NJD_K_FACTORY_RESET: njd_factory_reset();
 		}
 	}
 	return true;

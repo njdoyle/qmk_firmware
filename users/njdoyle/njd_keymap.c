@@ -14,7 +14,7 @@
 		NJD_K_LMIMOD , NJD_K_RMAMOD  , \
 		OSM(MOD_LSFT), OSM(MOD_RSFT) , \
 		KC_SPACE     , KC_ENTER      , \
-		NJD_K_LOWER  , NJD_K_RAISE   , \
+		NJD_K_NUMBER , NJD_K_SYMBOL  , \
 		KC_LALT      , NJD_K_FUNCTION)
 
 /* MACROS FOR LAYER LAYRES */
@@ -30,7 +30,7 @@
 		NJD_KM_MIMOD , NJD_KM_MAMOD   , \
 		NJD_KM_LSHIFT, NJD_KM_RSHIFT  , \
 		NJD_KM_SPACE , NJD_KM_ENTER   , \
-		NJD_KM_LOWER , NJD_KM_RAISE   , \
+		NJD_KM_NUMBER, NJD_KM_SYMBOL  , \
 		NJD_KM_LALT  , NJD_KM_FUNCTION) \
 	NJD_LAYER_LAYOUT( \
 		KC_##NJD_KM_00, KC_##NJD_KM_01, KC_##NJD_KM_02, KC_##NJD_KM_03, KC_##NJD_KM_04, KC_##NJD_KM_05, KC_##NJD_KM_06, KC_##NJD_KM_07, KC_##NJD_KM_08, KC_##NJD_KM_09, \
@@ -40,7 +40,7 @@
 		KC_##NJD_KM_MIMOD , KC_##NJD_KM_MAMOD   , \
 		KC_##NJD_KM_LSHIFT, KC_##NJD_KM_RSHIFT  , \
 		KC_##NJD_KM_SPACE , KC_##NJD_KM_ENTER   , \
-		KC_##NJD_KM_LOWER , KC_##NJD_KM_RAISE   , \
+		KC_##NJD_KM_NUMBER, KC_##NJD_KM_SYMBOL  , \
 		KC_##NJD_KM_LALT  , KC_##NJD_KM_FUNCTION)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -71,8 +71,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		A, S, H, T, G, Y, N, E   , O  , I   , \
 		Z, X, M, C, V, K, L, COMM, DOT, SLSH) ,
 
-	/* LOWER - Mostly numbers and their shifted symbol counterparts */
-	[NJD_L_LOWER] = NJD_LAYER_LAYOUT_KC( \
+	/* NUMBER - Mostly numbers and their shifted symbol counterparts */
+	[NJD_L_NUMBER] = NJD_LAYER_LAYOUT_KC( \
 		EXLM, AT  , HASH, DLR , PERC, CIRC, AMPR, ASTR, BSLS, PIPE, \
 		1   , 2   , 3   , 4   , 5   , 6   , 7   , 8   , 9   , 0   , \
 		PLUS, MINS, ASTR, SLSH, UNDS, COLN, EQL , COMM, DOT , SLSH, \
@@ -83,8 +83,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		____, ____, \
 		____, ____) ,
 
-	/* RAISE - Mostly paired enclosures and common programming symbols */
-	[NJD_L_RAISE] = NJD_LAYER_LAYOUT_KC( \
+	/* SYMBOL - Mostly paired enclosures and common programming symbols */
+	[NJD_L_SYMBOL] = NJD_LAYER_LAYOUT_KC( \
 		XXXX, EXLM, ASTR, PLUS, XXXX, XXXX, MINS, EQL , UNDS, XXXX, \
 		LBRC, RBRC, LCBR, RCBR, DLR , HASH, LPRN, RPRN, LT  , GT  , \
 		XXXX, XXXX, GRV , QUOT, XXXX, XXXX, DQUO, TILD, XXXX, XXXX, \
@@ -119,27 +119,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_ACL2    , KC_ACL1, \
 		XXXXXXX    , XXXXXXX) ,
 
-	/* FUNCTION - F keys, media controls, default layout selection */
+	/* FUNCTION - F keys, locks, media controls, screen shots */
 	[NJD_L_FUNCTION] = NJD_LAYER_LAYOUT( \
-		KC_F1, KC_F2 , KC_F3 , KC_F4 , KC_SLCK, NJD_K_OPTIONS, XXXXXXX, XXXXXXX        , XXXXXXX      , XXXXXXX     , \
-		KC_F5, KC_F6 , KC_F7 , KC_F8 , KC_CAPS, KC_MRWD      , KC_VOLD, KC_VOLU        , KC_MFFD      , KC_MPLY     , \
-		KC_F9, KC_F10, KC_F11, KC_F12, KC_NLCK, XXXXXXX      , XXXXXXX, NJD_K_SS_WINDOW, NJD_K_SS_AREA, NJD_K_SS_ALL, \
-		KC_LGUI, NJD_K_WORKMAN, \
-		KC_LCTL, KC_MUTE      , \
-		KC_LSFT, XXXXXXX      , \
-		_______, _______      , \
-		_______, _______      , \
-		_______, _______      ) ,
+		KC_F1, KC_F2 , KC_F3 , KC_F4 , KC_SLCK, XXXXXXX, XXXXXXX, XXXXXXX        , XXXXXXX      , XXXXXXX     , \
+		KC_F5, KC_F6 , KC_F7 , KC_F8 , KC_CAPS, KC_MRWD, KC_VOLD, KC_VOLU        , KC_MFFD      , KC_MPLY     , \
+		KC_F9, KC_F10, KC_F11, KC_F12, KC_NLCK, XXXXXXX, XXXXXXX, NJD_K_SS_WINDOW, NJD_K_SS_AREA, NJD_K_SS_ALL, \
+		KC_LGUI, NJD_K_CONFIGURATION, \
+		KC_LCTL, KC_MUTE            , \
+		KC_LSFT, XXXXXXX            , \
+		_______, _______            , \
+		_______, _______            , \
+		_______, _______            ) ,
 
-	/* OPTIONS - Keyboard options, not every-day use */
-	[NJD_L_OPTIONS] = NJD_LAYER_LAYOUT( \
-		RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, RGB_TOG, NJD_K_QWERTY , NJD_K_DVORAK, NJD_K_COLEMAK, NJD_K_COLEMAK_DH, NJD_K_COLEMAK_DHK, \
-		RGB_HUD, RGB_SAD, RGB_VAD, RGB_SPD, RGB_MOD, NJD_K_OS_MODE, XXXXXXX     , XXXXXXX      , XXXXXXX         , XXXXXXX          , \
-		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX      , XXXXXXX     , XXXXXXX      , XXXXXXX         , XXXXXXX          , \
-		XXXXXXX      , NJD_K_WORKMAN, \
-		NJD_K_OPTIONS, XXXXXXX      , \
-		XXXXXXX      , XXXXXXX      , \
-		XXXXXXX      , XXXXXXX      , \
-		XXXXXXX      , XXXXXXX      , \
-		XXXXXXX      , XXXXXXX      )
+	/* CONFIGURATION - Keyboard configuration, not every-day use */
+	[NJD_L_CONFIGURATION] = NJD_LAYER_LAYOUT( \
+		RGB_HUI        , RGB_SAI, RGB_VAI, RGB_SPI, RGB_TOG, XXXXXXX, XXXXXXX, NJD_K_OS_MACOS  , NJD_K_QWERTY , NJD_K_COLEMAK    , \
+		RGB_HUD        , RGB_SAD, RGB_VAD, RGB_SPD, RGB_MOD, XXXXXXX, XXXXXXX, NJD_K_OS_LINUX  , NJD_K_DVORAK , NJD_K_COLEMAK_DH , \
+		NJD_K_OLED_MODE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, NJD_K_OS_WINDOWS, NJD_K_WORKMAN, NJD_K_COLEMAK_DHK, \
+		XXXXXXX            , NJD_K_FACTORY_RESET, \
+		NJD_K_CONFIGURATION, XXXXXXX            , \
+		XXXXXXX            , XXXXXXX            , \
+		XXXXXXX            , XXXXXXX            , \
+		XXXXXXX            , XXXXXXX            , \
+		XXXXXXX            , XXXXXXX            )
 };
